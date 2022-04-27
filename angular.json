@@ -335,8 +335,16 @@
             "tsConfig": "apps/ui-task01/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["apps/ui-task01/src/favicon.ico", "apps/ui-task01/src/assets"],
-            "styles": ["apps/ui-task01/src/styles.scss"],
-            "scripts": []
+            "styles": [
+              "apps/ui-task01/src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/font-awesome/css/font-awesome.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/popper.js/dist/umd/popper.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {
