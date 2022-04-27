@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from '../services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,10 +25,13 @@ export class DashboardComponent implements OnInit {
   years : number[] = [];
   teamMembersSummary: any[] = [];
   teamMembers: any[] = [];
+  toDay: Date = new Date();
+
+  isOnClick=false;
 
 
 
-  constructor() { }
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
     this.designation = "Chef d'équipe";
@@ -43,6 +47,8 @@ export class DashboardComponent implements OnInit {
     this.clients = ["ABC Infotech Ltd.", "DEF Software Solutions", "GHI Industries"];
 
     this.projects = ["Projet 1","Projet 2","Projet 3","Projet 4"];
+
+    this.teamMembersSummary = this.dashboardService.getTeamMembersSummary();
 
     for (var i = 2019; i>=2016;i--) {
       this.years.push(i);
@@ -93,6 +99,10 @@ export class DashboardComponent implements OnInit {
         ],
       },
     ];
+  }
+
+  userClick(){
+    this.isOnClick=false;
   }
 
   onProjectChange($event :any) {
