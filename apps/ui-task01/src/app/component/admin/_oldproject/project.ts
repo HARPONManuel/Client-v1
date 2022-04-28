@@ -1,14 +1,14 @@
 export class Project {
-    projectId: any;
+    id: any;
     projectName: any;
-    dateCreated: any;
+    dateOfStart: any;
     teamSize: any;
 
     constructor()
     {
-        this.projectId = 0;
+        this.id = 0;
         this.projectName = null;
-        this.dateCreated = null;
+        this.dateOfStart = null;
         this.teamSize = 0;
     }
 }
