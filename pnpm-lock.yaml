@@ -18,6 +18,7 @@ specifiers:
   '@angular/platform-browser': 12.0.0
   '@angular/platform-browser-dynamic': 12.0.0
   '@angular/router': 12.0.0
+  '@auth0/angular-jwt': ^5.0.2
   '@ngrx/component-store': ^12.0.0
   '@ngrx/effects': ^12.0.0
   '@ngrx/entity': ^12.0.0
@@ -98,6 +99,7 @@ dependencies:
   '@angular/platform-browser': 12.0.0_d560c8b2e673011d8d48c1b58ea89c8b
   '@angular/platform-browser-dynamic': 12.0.0_e6080ad2ba5a711c6d1ab49fa8a3810c
   '@angular/router': 12.0.0_958eb9035a46f3bfe81e6ea7d534f221
+  '@auth0/angular-jwt': 5.0.2_@angular+common@12.0.0
   '@ngrx/component-store': 12.5.1_@angular+core@12.0.0+rxjs@6.5.5
   '@ngrx/effects': 12.5.1_afcf41838fdd53be174a95e43b3547f4
   '@ngrx/entity': 12.5.1_afcf41838fdd53be174a95e43b3547f4
@@ -658,6 +660,15 @@ packages:
       '@angular/core': 12.0.0_rxjs@6.5.5+zone.js@0.11.5
       '@angular/platform-browser': 12.0.0_d560c8b2e673011d8d48c1b58ea89c8b
       rxjs: 6.5.5
+      tslib: 2.4.0
+    dev: false
+
+  /@auth0/angular-jwt/5.0.2_@angular+common@12.0.0:
+    resolution: {integrity: sha512-rSamC9mu+gUxoR86AXcIo+KD7xRIro+/iu1F2Ld85YAZEVKlpB5vYG+g0yGaEOqjtQWP/i0H6fi6XMGPVHSYYQ==}
+    peerDependencies:
+      '@angular/common': '>=9.0.0'
+    dependencies:
+      '@angular/common': 12.0.0_@angular+core@12.0.0+rxjs@6.5.5
       tslib: 2.4.0
     dev: false
 

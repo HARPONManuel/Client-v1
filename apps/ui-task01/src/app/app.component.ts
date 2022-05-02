@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from './component/admin/services/login.service';
 
 @Component({
   selector: 'task01-root',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ui-task01';
+
+  constructor(public loginService: LoginService)
+  {
+  }
+
+  onSearchClick()
+  {
+    console.log(this.loginService.currentUserName);
+  }
 }
