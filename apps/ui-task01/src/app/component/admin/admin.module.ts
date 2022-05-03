@@ -4,17 +4,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MyProfileComponent } from '../my-profile/my-profile.component';
 import { AboutComponent } from './about/about.component';
 import { DashboardService } from './services/dashboard.service';
-import { FormsModule } from '@angular/forms';
-<<<<<<< HEAD
-=======
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProjectComponent } from './project/project.component';
+import { ProductsFormComponent } from './products/products-form/products-form.component';
+import { ProductsListComponent } from './products/products-list/products-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { CardModule } from 'primeng/card';
-import { FieldsetModule } from 'primeng/fieldset';
-import { HttpClientModule } from '@angular/common/http';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
+import { CategoriesService } from '@bluebits/products';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -27,17 +27,12 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { EditorModule } from 'primeng/editor';
 import { TagModule } from 'primeng/tag';
 import { InputMaskModule } from 'primeng/inputmask';
+import { FieldsetModule } from 'primeng/fieldset';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { ProductsListComponent } from './products/products-list/products-list.component';
-import { ProductsFormComponent } from './products/products-form/products-form.component';
-import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
+import { RouterModule, Routes } from '@angular/router';
 import { CategoriesListComponent } from './categories/categories-list/categories-list.component';
-import { CategoriesService } from '@bluebits/products';
-import { AppRoutingModule } from '../../app-routing.module';
-import { AppComponent } from '../../app.component';
+import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
 
 const UX_MODULE = [
   CardModule,
@@ -58,35 +53,40 @@ const UX_MODULE = [
   FieldsetModule
 ];
 
->>>>>>> 29ba402b40ff5fa88f20c46a89e80098fd216f46
-
 @NgModule({
   declarations: [
+    DashboardComponent,
+    MyProfileComponent,
+    AboutComponent,
+    ProjectComponent,
+    ProductsFormComponent,
+    ProductsListComponent,
+    CategoriesListComponent,
+    CategoriesFormComponent
   ],
-<<<<<<< HEAD
-  imports: [ CommonModule, FormsModule],
-  exports: [ DashboardComponent, MyProfileComponent, AboutComponent, ProjectComponent ],
-  providers: [ DashboardService ]
-=======
   imports: [ 
-    CommonModule,
+    CommonModule, 
+    FormsModule,
+    BrowserAnimationsModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
     ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule,
-    ...UX_MODULE ],
-  exports: [],
-  providers: [
-    CategoriesService, 
+    ...UX_MODULE
+  ],
+  exports: [ 
+    DashboardComponent, 
+    MyProfileComponent, 
+    AboutComponent, 
+    ProjectComponent,    
+    ProductsFormComponent,
+    ProductsListComponent
+   ],
+  providers: [ 
     DashboardService,
+    CategoriesService,
     MessageService,
-    ConfirmationService, ],
-  bootstrap: [AppComponent]
->>>>>>> 29ba402b40ff5fa88f20c46a89e80098fd216f46
+    ConfirmationService,
+   ]
 })
 export class AdminModule
 {
