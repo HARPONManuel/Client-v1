@@ -11,7 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class LoginService
 {
   private httpClient: HttpClient | null = null;
-  urlPrefix: string = "https://task01-api.herokuapp.com"; //make this as empty ("") if you are using asp.net core [without CORS]
+  urlPrefix: string = "https://task01-api-svr.herokuapp.com/api/v1"; //make this as empty ("") if you are using asp.net core [without CORS]
 
   constructor(private httpBackend: HttpBackend, private jwtHelperService: JwtHelperService)
   {
@@ -22,15 +22,16 @@ export class LoginService
   public Login(loginViewModel: LoginViewModel): Observable<any>
   {
     this.httpClient = new HttpClient(this.httpBackend);
-    return this.httpClient.post<any>(this.urlPrefix + "/authenticate", loginViewModel, { responseType: "json" })
-      .pipe(map(user =>
+    return this.httpClient.post<any>(this.urlPrefix + "/authenticate", loginViewModel, { responseType: "json", observe: "response" })
+      .pipe(map(response =>
       {
-        if (user)
+        if (response)
         {
-          this.currentUserName = user.userName;
-          sessionStorage['currentUser'] = JSON.stringify(user);
+          this.currentUserName = response.body.userName;
+          sessionStorage['currentUser'] = JSON.stringify(response.body);
+          sessionStorage['XSRFRequestToken'] = response.headers.get("XSRF-REQUEST-TOKEN");
         }
-        return user;
+        return response.body;
       }));
   }
 
@@ -42,7 +43,7 @@ export class LoginService
 
   public isAuthenticated(): boolean
   {
-    var token = sessionStorage.getItem("currentUser") ? JSON.parse(sessionStorage.getItem("currentUser") as any).token : null;
+    var token = sessionStorage.getItem("currentUser") ? JSON.parse(sessionStorage.getItem("currentUser") as string).token : null;
     if (this.jwtHelperService.isTokenExpired())
     {
       return false; //token is not valid

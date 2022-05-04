@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs';
-import { environment } from '@env/environment';
 import { map } from "rxjs/operators";
 import { Project } from '../project/project';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectsService {
-  urlPrefix: string = "https://task01-api.herokuapp.com/api/v1"; //make this as empty ("") if you are using asp.net core [without CORS]
+export class ProjectsService
+{
+  urlPrefix: string = "https://task01-api-svr.herokuapp.com/api/v1"; //make this as empty ("") if you are using asp.net core [without CORS]
 
   constructor(private httpClient: HttpClient)
   {
@@ -17,30 +17,29 @@ export class ProjectsService {
 
   getAllProjects(): Observable<Project[]>
   {
-    // var currentUser = { token: "" };
-    // var headers = new HttpHeaders();
-    // headers = headers.set("Authorization", "Bearer ");
-    // if (sessionStorage['currentUser'] != null)
-    // {
-    //   currentUser = JSON.parse(sessionStorage['currentUser']);
-    //   headers = headers.set("Authorization", "Bearer " + currentUser.token);
-    // }
-    return this.httpClient.get<Project[]>(this.urlPrefix + "/projects", { responseType: "json" })
+    return this.httpClient.get<Project[]>(this.urlPrefix + "/rojects", { responseType: "json" })
       .pipe(map(
         (data: Project[]) =>
         {
           for (let i = 0; i < data.length; i++)
           {
-            data[i].teamSize = data[i].teamSize * 100;
+            //data[i].teamSize = data[i].teamSize * 100;
           }
           return data;
         }
       ));
   }
 
+  getProjectByProjectID(ProjectID: number): Observable<Project>
+  {
+    return this.httpClient.get<Project>(this.urlPrefix + "/projects/searchbyprojectid/" + ProjectID, { responseType: "json" });
+  }
+
   insertProject(newProject: Project): Observable<Project>
   {
-    return this.httpClient.post<Project>(this.urlPrefix + "/projects", newProject, { responseType: "json" });
+    var requestHeaders = new HttpHeaders();
+    requestHeaders = requestHeaders.set("X-XSRF-TOKEN", sessionStorage['XSRFRequestToken']);
+    return this.httpClient.post<Project>(this.urlPrefix + "/projects", newProject, { headers: requestHeaders, responseType: "json" });
   }
 
   updateProject(existingProject: Project): Observable<Project>
@@ -58,3 +57,4 @@ export class ProjectsService {
     return this.httpClient.get<Project[]>(this.urlPrefix + "/projects/search/" + searchBy + "/" + searchText, { responseType: "json" });
   }
 }
+

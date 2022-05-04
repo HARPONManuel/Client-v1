@@ -14,14 +14,16 @@ import { ProjectComponent } from './component/admin/project/project.component';
 const routes: Routes = [
   {path: "", redirectTo:"dashboard", pathMatch:"full"},
   {path: "login", component: LoginComponent },
-  {path: "dashboard", component: DashboardComponent, canActivate: [ CanActivateGuardService ] },
+  {path: "dashboard", component: DashboardComponent, canActivate: [ CanActivateGuardService ], data: { expectedRole: "Admin" }  },
   {path: "about", component: AboutComponent },
   {path: "my-profile", component: MyProfileComponent},
-  {path: "projects", component: ProjectComponent, canActivate: [ CanActivateGuardService ] },
-  {path: "categories/form", component: CategoriesFormComponent, canActivate: [ CanActivateGuardService ] },
-  {path: "products/form", component: ProductsFormComponent, canActivate: [ CanActivateGuardService ] },
-  {path: "categories", component: CategoriesListComponent, canActivate: [ CanActivateGuardService ] },
-  {path: "products", component: ProductsListComponent, canActivate: [ CanActivateGuardService ] },
+  {path: "projects", component: ProjectComponent, canActivate: [ CanActivateGuardService ], data: { expectedRole: "Admin" }  },
+  {path: "categories/form", component: CategoriesFormComponent, canActivate: [ CanActivateGuardService ], data: { expectedRole: "Admin" }  },
+  {path: "products/form", component: ProductsFormComponent, canActivate: [ CanActivateGuardService ], data: { expectedRole: "Admin" }  },
+  {path: "categories/form/:id", component: CategoriesFormComponent, canActivate: [ CanActivateGuardService ], data: { expectedRole: "Admin" }  },
+  {path: "products/form/:id", component: ProductsFormComponent, canActivate: [ CanActivateGuardService ], data: { expectedRole: "Admin" }  },
+  {path: "categories", component: CategoriesListComponent, canActivate: [ CanActivateGuardService ], data: { expectedRole: "Admin" }  },
+  {path: "products", component: ProductsListComponent, canActivate: [ CanActivateGuardService ], data: { expectedRole: "Admin" }  },
 ];
 
 @NgModule({

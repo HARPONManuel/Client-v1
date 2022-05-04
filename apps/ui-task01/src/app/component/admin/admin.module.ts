@@ -33,6 +33,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { RouterModule, Routes } from '@angular/router';
 import { CategoriesListComponent } from './categories/categories-list/categories-list.component';
 import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
+import { LoginComponent } from '../login/login.component';
+import { ProjectIDUniqueValidatorDirective } from './services/project-idunique-validator.directive';
+import { ClientLocationStatusValidatorDirective } from './services/client-location-status-validator.directive';
+import { TeamSizeValidatorDirective } from './services/team-size-validator.directive';
 
 const UX_MODULE = [
   CardModule,
@@ -53,16 +57,35 @@ const UX_MODULE = [
   FieldsetModule
 ];
 
+const routes: Routes = [
+  {path: "", redirectTo:"dashboard", pathMatch:"full"},
+  {path: "login", component: LoginComponent },
+  {path: "dashboard", component: DashboardComponent},
+  {path: "about", component: AboutComponent },
+  {path: "my-profile", component: MyProfileComponent},
+  {path: "projects", component: ProjectComponent},
+  {path: "categories/form", component: CategoriesFormComponent},
+  {path: "products/form", component: ProductsFormComponent},
+  {path: "categories/form/:id", component: CategoriesFormComponent},
+  {path: "products/form/:id", component: ProductsFormComponent},
+  {path: "categories", component: CategoriesListComponent},
+  {path: "products", component: ProductsListComponent},
+];
+
 @NgModule({
   declarations: [
     DashboardComponent,
+    LoginComponent,
     MyProfileComponent,
     AboutComponent,
     ProjectComponent,
     ProductsFormComponent,
     ProductsListComponent,
     CategoriesListComponent,
-    CategoriesFormComponent
+    CategoriesFormComponent,
+    TeamSizeValidatorDirective,
+    ClientLocationStatusValidatorDirective,
+    ProjectIDUniqueValidatorDirective
   ],
   imports: [ 
     CommonModule, 
@@ -70,6 +93,7 @@ const UX_MODULE = [
     BrowserAnimationsModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
+    RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
     ReactiveFormsModule,
     ...UX_MODULE
   ],
@@ -79,7 +103,11 @@ const UX_MODULE = [
     AboutComponent, 
     ProjectComponent,    
     ProductsFormComponent,
-    ProductsListComponent
+    ProductsListComponent,
+    LoginComponent,
+    TeamSizeValidatorDirective,
+    ClientLocationStatusValidatorDirective,
+    ProjectIDUniqueValidatorDirective 
    ],
   providers: [ 
     DashboardService,
